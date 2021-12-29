@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React,{useState,useEffect} from "react"
+import Datafetchandpagination from "./Components/Datafetchandpagination";
+import {BrowserRouter as Router,Route,Switch,Link} from 'react-router-dom'
+import Quiz from "./Pages/Quiz";
+import Secondpagequestionandans from "./Pages/Secondpagequestionandans";
+import Countryandweather from "./Components/Countryandweather";
+import Authprovider from "./hooks/Context";
+function App(){
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      <Authprovider>
+        <Router>
+        <nav>
+          <Link to="/">country search and weather</Link><br/>
+          <Link to="/datafetch">every time 10 data fetch after 3 second</Link><br/>
+          <Link to="/quizapp">quiz app</Link><br/>
+       </nav>
+       <br/><br/><br/>
+          <Switch>
+              <Route exact path="/">
+                <Countryandweather/>
+              </Route>
 
+              <Route path="/datafetch">
+                   <Datafetchandpagination/>
+              </Route>
+
+              <Route path="/quizapp">
+                   <Quiz/>
+              </Route>
+             
+          </Switch>
+        </Router> 
+
+
+
+      </Authprovider>  
+    
+
+    
+
+
+
+
+
+    </>
+  )
+}
 export default App;
